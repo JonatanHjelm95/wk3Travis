@@ -33,6 +33,14 @@ public class MovieResource {
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
     }
+
+    @Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllMovies() {
+        return GSON.toJson(FACADE.getAllMovies());
+    }
+    
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})

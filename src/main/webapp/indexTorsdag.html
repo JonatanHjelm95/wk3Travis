@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="mystyle.css">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head>
+    <!-- <body onload="myFunctionA()"> -->
+    <body>
+        <h1>Dom Manipulation and Events</h1>
+        <h2>Simple DOM manipulation and Event handling</h2>
+        <div id="divone">1</div>
+        <div id="divtwo">2</div>
+        <div id="divthree">3</div>
+
+
+        <button onclick="myFunctionB()">Click me!</button>
+
+        <h2>Event Bubbling and event arguments</h2>
+        <div id="divfour">4</div>
+        <div id="divfive">5</div>
+
+        <button onclick="myFunctionC()">Click me</button>
+
+        <div id="outer">
+            <p id="outerText"></p>
+            <div id="divsix">6</div>
+            <div id="divseven">7</div>
+            <div id="diveight">8</div>
+            <div id="divnine">9</div>
+            <div id="divten">10</div>
+            <div id="diveleven">11</div>
+            <div id="divtwelve">12</div>
+            <div id="divthirteen">13</div>
+            <div id="divfourteen">14</div>
+            <div id="divfifteen">15</div>
+        </div>
+
+
+        <div id="mapLists">
+            <h2>Map Lists</h2>
+            <button onclick="createList()">create list</button>
+            <div id="list">
+
+            </div>
+            <input type="text" id="nameinput">
+            <button onclick="addNameToList()">add name</button> 
+            <button onclick="removeFirst()">remove first</button> 
+            <button onclick="removeLast()">remove last</button> 
+
+        </div>
+        <div id="table">
+            <h2>Dynamic table rows</h2>
+            <button onclick="generateTable()">view table</button>
+        </div>
+        <input type="text" id="price" placeholder="10000">
+        <button onclick="createFilteredTable()">price less than</button>
+
+
+        <div id="container">
+            <div id="display" class="t4"></div>
+            <div id="buttons">
+                <div class="t1">7</div>
+                <div class="t1">8</div>
+                <div class="t1">9</div>
+                <div class="t1">/</div>
+
+                <div class="t1">4</div>
+                <div class="t1">5</div>
+                <div class="t1">6</div>
+                <div class="t1">*</div>
+
+                <div class="t1">1</div>
+                <div class="t1">2</div>
+                <div class="t1">3</div>
+                <div class="t1">-</div>
+
+                <div class="t1">0</div>
+                <div class="t1">.</div>
+                <div class="t1">+</div>
+                <div id="calculate" class="t1">=</div>
+            </div>
+        </div>
+
+        <script>
+            var one = document.getElementById("divone");
+            var two = document.getElementById("divtwo");
+            var three = document.getElementById("divthree");
+            var four = document.getElementById("divfour");
+            var five = document.getElementById("divfive");
+
+
+
+            var names = ["Lars", "Jan", "Peter", "Ian"];
+
+            var cars = [
+                {id: 1, year: 1997, make: 'Ford', model: 'E350', price: 3000},
+                {id: 2, year: 1999, make: 'Chevy', model: 'Venture', price: 4900},
+                {id: 3, year: 2000, make: 'Chevy', model: 'Venture', price: 5000},
+                {id: 4, year: 1996, make: 'Jeep', model: 'Grand Cherokee', price: 4799},
+                {id: 5, year: 2005, make: 'Volvo', model: 'V70', price: 44799}
+            ];
+
+
+            var outer = document.getElementById("outer");
+            outer.addEventListener("click", clickMe, false)
+            var text = document.getElementById("outerText");
+            var buttonClick = document.getElementById("buttons");
+            buttonClick.addEventListener("click", addToField, false);
+
+            var calc = document.getElementById("buttons");
+            calc.addEventListener("click", calculate, false);
+
+            function myFunctionA() {
+                one.style.backgroundColor = "red";
+                two.style.backgroundColor = "green";
+                three.style.backgroundColor = "blue";
+
+            }
+            function myFunctionB() {
+                one.style.backgroundColor = "blue";
+                two.style.backgroundColor = "red";
+                three.style.backgroundColor = "green";
+
+            }
+            function myFunctionC() {
+                one.innerHTML = "hi from" + one.id;
+                two.innerHTML = "hi from" + two.id;
+                three.innerHTML = "hi from" + three.id;
+                four.innerHTML = "hi from" + four.id;
+                five.innerHTML = "hi from" + five.id;
+            }
+
+            function clickMe(e) {
+                text.innerHTML = e.target.id;
+            }
+
+            function createList() {
+                var m = names.map(function (x) {
+                    return "<li>" + x.toString() + "</li>"
+                }).join('');
+                var div = document.getElementById("list");
+                div.innerHTML = "<ul>" + m + "</ul>";
+            }
+
+            function addNameToList() {
+                var name = document.getElementById("nameinput").value;
+                names.push(name);
+                createList(names);
+                // createList();
+            }
+            function removeFirst() {
+                names.shift();
+                createList(names);
+            }
+            function removeLast() {
+                names.pop();
+                createList(names);
+            }
+            function generateTable() {
+                var table = "<table class='table'>";
+                table += createTableHeaders();
+                table += createTableData();
+                table += "</table>";
+                document.getElementById("table").innerHTML = table;
+            }
+            function createTableHeaders() {
+                return "<th>id</th><th>Year</th><th>Make</th><th>Model</th><th>Price</th>";
+            }
+            function createTableData() {
+                var tableData = "";
+                for (let i = 0; i < cars.length; i++) {
+                    tableData += "<tr><td>" + cars[i]["id"] + "</td><td>" + cars[i]["year"] + "</td><td>" + cars[i]["make"] + "</td><td>" + cars[i]["model"] + "</td><td>" + cars[i]["price"] + "</td></tr>"
+                }
+                return tableData;
+            }
+            function createFilteredTableData(arr) {
+                var tableData = "";
+                for (let i = 0; i < arr.length; i++) {
+                    tableData += "<tr><td>" + arr[i]["id"] + "</td><td>" + arr[i]["year"] + "</td><td>" + arr[i]["make"] + "</td><td>" + arr[i]["model"] + "</td><td>" + arr[i]["price"] + "</td></tr>"
+                }
+                return tableData;
+            }
+            function filterArray(price) {
+                var filtered = [];
+                for (var i = 0; i < cars.length; i++) {
+                    if (cars[i]["price"] < price) {
+                        console.log(true)
+                        filtered.push(cars[i]);
+                    }
+                }
+                return filtered;
+            }
+            function createFilteredTable() {
+
+                var table = "<table class='table'>";
+                table += createTableHeaders();
+                var price = document.getElementById("price").value;
+
+                var arr = filterArray(price);
+                table += createFilteredTableData(arr);
+                table += "</table>";
+                document.getElementById("table").innerHTML = table;
+            }
+            function init() {
+                var memory;
+            }
+            function addToField(e) {
+                if (e.target.getAttribute('id') !== "calculate")  {
+                    document.getElementById("display").innerHTML += e.target.innerText;
+                } 
+                if (e.target.innerText === "=") {
+                    calculate();
+                }
+
+            }
+            function calculate() {
+                var input = document.getElementById("display").innerHTML;
+                var numbers = input.split("+");
+                var result = add(numbers[0], numbers[1]);
+                console.log(result)
+                //document.getElementById("display").innerHTML = checkInput(field);
+            }
+            function checkInput(field) {
+                var numbers = field.split("+");
+                return add(numbers[0], numbers[1]);
+            }
+            function add(n1, n2) {
+                var n1Int = parseInt(n1)
+                var n2Int = parseInt(n2)
+
+                return n1Int + n2Int;
+            }
+
+        </script>
+    </body>
+</html>

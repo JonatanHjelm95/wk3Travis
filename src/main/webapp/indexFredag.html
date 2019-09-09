@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="mystyle.css">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <input type="text" id="moviename">
+        <button onclick="searchMovie()">search movie</button>
+        <p>Har tilføjet en enkelt fetch funktion. Funktionen søger på moviename
+        Brug ctrl+shift+i for at se data i console</p>
+        <script>
+            function searchMovie() {
+                var input = document.getElementById('moviename').value;
+                fetch("http://localhost:8080/TravisTestWeek3/api/movie/" + input)
+                        .then(res => res.json()) //in flow1, just do it
+                        .then(data => {
+                            // Inside this callback, and only here, the response data is available
+                            console.log("data", data);
+                            /* data now contains the response, converted to JavaScript
+                             Observe the output from the log-output above
+                             Now, just build your DOM changes using the data*/
+                        })
+            }
+
+        </script>
+    </body>
+</html>

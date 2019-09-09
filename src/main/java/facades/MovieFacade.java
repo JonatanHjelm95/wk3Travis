@@ -62,6 +62,16 @@ public class MovieFacade {
 
     }
 
+    public List getAllMovies() {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Movie> query = em.createQuery("Select m from Movie m", Movie.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public void addMovie(Movie movie) {
         EntityManager em = getEntityManager();
         try {
@@ -73,12 +83,14 @@ public class MovieFacade {
         }
     }
 //
-//    public static void main(String[] args) {
-//        //MovieFacade em = getFacade(Persistence.createEntityManagerFactory("pu"));
-////        MovieFacade em = getFacade(EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.DROP_AND_CREATE));
+    public static void main(String[] args) {
+        //MovieFacade em = getFacade(Persistence.createEntityManagerFactory("pu"));
+//        MovieFacade em = getFacade(EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.DROP_AND_CREATE));
 //
-////        em.addMovie(new Movie("hej", 9.8, 1998));
-//
-//    }
+//        em.addMovie(new Movie("Godfather", 9.8, 1998));
+//        em.addMovie(new Movie("Godfather II", 9.8, 1998));
+//        em.addMovie(new Movie("Godfather III", 9.8, 1998));
+
+    }
 
 }

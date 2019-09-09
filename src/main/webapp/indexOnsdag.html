@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="mystyle.css">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <h1>Javascript Arrays</h1>
+        <h2>Assignment 1</h2>
+        <div id="BC">
+            <button onclick="myFunctionA()">task A</button>
+            <button onclick="myFunctionB()">task B</button>
+            <button onclick="myFunctionC()">task C</button>
+            <button onclick="myFunctionDE()">task D & E</button>
+            <button onclick="myFunctionFG()">task F & G</button>
+            <button onclick="myFunctionH()">task H</button>
+            <button onclick="myFunctionI()">task I</button>
+            <button onclick="myFunctionJ()">task J</button>
+            <button onclick="myFunctionL()">task L</button>
+            <button onclick="myFunctionM()">task M</button>
+
+            <p id="ACResult"></p>
+        </div>
+        <script>
+            var boys = ["Peter", "Lars", "Ole"];
+            var girls = ["Janne", "Hanne", "Sanne"];
+
+            var all = boys.concat(girls);
+
+
+
+            function myFunctionA() {
+
+                document.getElementById("ACResult").innerHTML = all;
+
+            }
+
+            function myFunctionB() {
+
+                var comma = all.join();
+                document.getElementById("ACResult").innerHTML = comma;
+
+            }
+            function myFunctionC() {
+
+                var hyphen = all.join(" - ");
+                document.getElementById("ACResult").innerHTML = hyphen;
+
+            }
+
+            function myFunctionDE() {
+
+                all.unshift("Hans", "Kurt");
+                all.push("Gitte", "Lone");
+                document.getElementById("ACResult").innerHTML = all;
+
+            }
+            function myFunctionFG() {
+                all.shift();
+                all.pop(all.length);
+
+                document.getElementById("ACResult").innerHTML = all;
+
+            }
+
+            function myFunctionH() {
+                all.splice(1, 2);
+
+                document.getElementById("ACResult").innerHTML = all;
+
+            }
+            function myFunctionI() {
+                all.reverse();
+
+                document.getElementById("ACResult").innerHTML = all;
+
+            }
+            function myFunctionJ() {
+                all.sort();
+
+                document.getElementById("ACResult").innerHTML = all;
+
+            }
+
+            function myFunctionL() {
+                var m = all.map(function (x) {
+                    return x.toUpperCase();
+                });
+
+                document.getElementById("ACResult").innerHTML = m;
+
+            }
+
+            function myFunctionM() {
+                var f = all.filter(function (t) {
+                    if (t.substring(0, 1) == "I" || t.substring(0, 1) == "L")
+                        return t;
+                });
+                document.getElementById("ACResult").innerHTML = f;
+
+            }
+        </script>
+    </body>
+</html>
